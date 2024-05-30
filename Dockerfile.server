@@ -1,0 +1,18 @@
+FROM node:20
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+WORKDIR /usr/app
+
+COPY package*.json ./
+COPY ./prisma ./prisma/
+
+RUN pnpm i
+
+COPY . .
+
+EXPOSE 4200
+
+CMD [ "pnpm", "run", "start:prod" ]

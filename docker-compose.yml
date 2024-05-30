@@ -1,0 +1,63 @@
+version: '3.8'
+
+services: 
+  proxy:
+    container_name: proxy
+    image: nginx:mainline
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - main
+    depends_on:
+      - frontend
+      - backend
+  frontend:
+    container_name: frontend
+    build:
+      context: ../project-management-client
+      dockerfile: ../dev-config/Dockerfile.client
+    ports:
+      - "3000:3000"
+    networks:
+      - main
+    depends_on:
+      - backend
+  backend:
+    container_name: backend
+    build: 
+      context: ../project-management-server
+      dockerfile: ../dev-config/Dockerfile.server
+    ports:
+      - "4200:4200"
+    environment: 
+      PORT: ${PORT}
+      HOST: ${HOST}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_ACCESS_EXPIRES: ${JWT_ACCESS_EXPIRES}
+      DATABASE_URL: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@postgres:5432/${DATABASE_NAME}?schema=public
+    networks:
+      - main
+    depends_on:
+      - db
+  db:
+    container_name: postgres
+    image: postgres:14.1-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment: 
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks:
+      - main
+
+networks:
+  main:
+volumes:
+  db:
