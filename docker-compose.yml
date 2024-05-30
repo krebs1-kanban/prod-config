@@ -1,6 +1,6 @@
 version: '3.8'
 
-services: 
+services:
   proxy:
     container_name: proxy
     image: nginx:mainline
@@ -18,7 +18,7 @@ services:
     container_name: frontend
     build:
       context: ../project-management-client
-      dockerfile: ../dev-config/Dockerfile.client
+      dockerfile: ../prod-config/Dockerfile.client
     ports:
       - "3000:3000"
     networks:
@@ -29,10 +29,10 @@ services:
     container_name: backend
     build: 
       context: ../project-management-server
-      dockerfile: ../dev-config/Dockerfile.server
+      dockerfile: ../prod-config/Dockerfile.server
     ports:
       - "4200:4200"
-    environment: 
+    environment:
       PORT: ${PORT}
       HOST: ${HOST}
       JWT_SECRET: ${JWT_SECRET}
