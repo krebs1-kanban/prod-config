@@ -25,8 +25,6 @@ services:
         BACKEND_URL: ${BACKEND_URL}
     ports:
       - '3000:3000'
-    environment:
-      NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL}
     networks:
       - main
     depends_on:
