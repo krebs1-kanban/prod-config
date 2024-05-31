@@ -1,4 +1,4 @@
 .env
-etc/
+certbot/
 nginx.conf
 docker-compose.yml
