@@ -4,11 +4,13 @@ services:
   certbot:
     image: certbot/certbot
     container_name: certbot
-    restart: "no"
+    restart: 'no'
     volumes:
-      - ./etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - proxy
+    command: certonly --webroot -w /var/www/certbot --email {email} -d {domain} --agree-tos
   proxy:
     container_name: proxy
     image: nginx:mainline
