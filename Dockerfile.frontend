@@ -1,6 +1,10 @@
 FROM node:18
 
+ARG BACKEND_URL
+
 WORKDIR /usr/app
+
+ENV NEXT_PUBLIC_BACKEND_URL=${BACKEND_URL}
 
 COPY package*.json ./
 
