@@ -24,6 +24,7 @@ services:
       dockerfile: ../prod-config/Dockerfile.backend
     ports:
       - '4200:4200'
+      - '${MAILER_PORT}:${MAILER_PORT}'
     environment:
       PORT: 4200
       HOST: backend
