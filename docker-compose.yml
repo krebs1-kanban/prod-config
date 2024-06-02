@@ -14,7 +14,6 @@ services:
       - '3000:3000'
     networks:
       - main
-      - internet
     depends_on:
       - backend
   backend:
@@ -40,6 +39,7 @@ services:
       MAILER_FROM: ${MAILER_FROM}
     networks:
       - main
+      - internet
     depends_on:
       - db
   db:
