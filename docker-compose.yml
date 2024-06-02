@@ -22,8 +22,6 @@ services:
     ports:
       - '80:80'
       - '443:443'
-    environment:
-      - NGINX_SERVERNAME: ${NGINX_SERVERNAME}
     networks:
       - main
       - internet
