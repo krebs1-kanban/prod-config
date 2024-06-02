@@ -56,10 +56,15 @@ services:
     environment:
       PORT: 4200
       HOST: backend
-      CLIENT_URL: ${CLIENT_URL}
+      CLIENT_URL: ${FRONTEND_URL_URL}
       JWT_SECRET: ${JWT_SECRET}
       JWT_ACCESS_EXPIRES: ${JWT_ACCESS_EXPIRES}
       DATABASE_URL: postgresql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@postgres:5432/${DATABASE_NAME}?schema=public
+      MAILER_USERNAME: ${MAILER_USERNAME}
+      MAILER_PASSWORD: ${MAILER_PASSWORD}
+      MAILER_HOST: ${MAILER_HOST}
+      MAILER_PORT: ${MAILER_PORT}
+      MAILER_FROM: ${MAILER_FROM}
     networks:
       - main
     depends_on:
