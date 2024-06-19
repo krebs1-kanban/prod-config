@@ -10,6 +10,8 @@ services:
       args:
         BACKEND_URL: ${BACKEND_URL}
         FRONTEND_URL: ${FRONTEND_URL}
+        STATIC_FILES_URL_SEGMENT: '/static-files'
+        PROJECT_ATTACHMENTS_URL_SEGMENT: '/project-attachments'
     ports:
       - '3000:3000'
     networks:
